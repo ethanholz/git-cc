@@ -1,6 +1,7 @@
 {
   description = "A very basic flake";
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -8,7 +9,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         name = "git-cc";
-        pkgs = (import nixpkgs) {
+        pkgs = import nixpkgs {
           inherit system;
         };
         buildGoModule = pkgs.buildGo119Module;
@@ -41,7 +42,6 @@
             vendorSha256 = "sha256-by2OO4HmUFYPelwA1mdD+7y8sK+C8Ga6gIL6uxB+V8k=";
             meta = {
               description = "git-cc is a tool to help you write better commit messages";
-              homepage = "git@github.com:ethanholz/git-cc.git";
             };
           };
         };
